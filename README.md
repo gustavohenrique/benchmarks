@@ -1,5 +1,5 @@
 # benchmark
-> Simple codes for strees tests
+> Simple codes for stress tests
 
 ## Configure
 
