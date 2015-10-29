@@ -8,6 +8,20 @@ Run postgres as Docker container:
     docker run -p 5432:5432 --name postgres -e POSTGRES_PASSWORD=root -d postgres
     docker run -it --link postgres:postgres --rm postgres sh -c 'exec psql -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres'
 
+SQL Schema:
+
+```sql
+CREATE TABLE urls (
+   id SERIAL PRIMARY KEY NOT NULL,
+   long_url VARCHAR(250) NOT NULL,
+   short_url VARCHAR(20) NOT NULL,
+   clicks INT DEFAULT 0,
+   created_at DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+INSERT INTO urls (long_url, short_url) VALUES ('http://mywebapp.com/about', 'http://goo.gl/7dh3');
+```
+
 Map in `/etc/hosts` the PostgreSQL server ip:
 
     $ cat /etc/hosts
