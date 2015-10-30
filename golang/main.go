@@ -5,7 +5,6 @@ import (
     "fmt"
     "net/http"
     "github.com/jmoiron/sqlx"
-    _ "github.com/lib/pq"
 	"log"
 )
 
@@ -29,7 +28,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/hello", hello)
 	mux.HandleFunc("/", findAll)
-	
+
     http.ListenAndServe(":8080", mux)
 }
 
