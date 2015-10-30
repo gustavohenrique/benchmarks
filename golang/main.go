@@ -26,10 +26,11 @@ func main() {
 
     db.SetMaxOpenConns(5)
 
-    http.HandleFunc("/hello", hello)
-    http.HandleFunc("/", findAll)
-
-    http.ListenAndServe(":8080", nil)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/hello", hello)
+	mux.HandleFunc("/", findAll)
+	
+    http.ListenAndServe(":8080", mux)
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
