@@ -17,7 +17,8 @@ type Site struct {
 var db *sqlx.DB
 
 func main() {
-    db, err := sqlx.Connect("postgres", "user=postgres dbname=benchmark password=root host=docker.postgres.local sslmode=disable")
+    var err error
+    db, err = sqlx.Connect("postgres", "user=postgres dbname=benchmark password=root host=docker.postgres.local sslmode=disable")
 
 	if err != nil {
 		log.Fatal(err)
