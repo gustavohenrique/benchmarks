@@ -27,7 +27,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	db.SetMaxOpenConns(5)
+	db.SetMaxOpenConns(10)
 
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/", findAll)
