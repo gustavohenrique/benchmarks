@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"github.com/jmoiron/sqlx"
 	"log"
+	"github.com/jmoiron/sqlx"
 )
 
 type Site struct {
