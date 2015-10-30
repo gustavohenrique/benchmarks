@@ -7,6 +7,7 @@ import (
 	"log"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
+	"runtime"
 )
 
 type Site struct {
@@ -17,6 +18,8 @@ type Site struct {
 var db *sqlx.DB
 
 func main() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+
 	var err error
 	db, err = sqlx.Connect("postgres", "user=postgres dbname=benchmark password=root host=docker.postgres.local sslmode=disable")
 
@@ -26,11 +29,14 @@ func main() {
 
 	db.SetMaxOpenConns(5)
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("/hello", hello)
-	mux.HandleFunc("/", findAll)
+	http.HandleFunc("/hello", hello)
+	http.HandleFunc("/", findAll)
 
-	http.ListenAndServe(":8080", mux)
+	srv := &http.Server{
+		Addr:    ":8080",
+		Handler: nil,
+	}
+	srv.ListenAndServe()
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
