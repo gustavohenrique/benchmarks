@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"log"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 type Site struct {
@@ -28,7 +29,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/hello", hello)
 	mux.HandleFunc("/", findAll)
-	
+
 	http.ListenAndServe(":8080", mux)
 }
 
